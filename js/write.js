@@ -71,8 +71,8 @@ function todayStr() {
 }
 dateEl.value = todayStr();
 
-// .md 다운로드
-$('btn-download').addEventListener('click', () => {
+// .md 다운로드 (재사용 가능한 헬퍼)
+function downloadMd() {
   const slug = slugEl.value.trim() || 'untitled';
   const content = bodyEl.value;
   const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
@@ -84,7 +84,9 @@ $('btn-download').addEventListener('click', () => {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
-});
+}
+
+$('btn-download').addEventListener('click', downloadMd);
 
 // ─── 폴더에 직접 저장 (File System Access API) ───
 const directSaveBtn = $('btn-save-direct');
@@ -106,49 +108,54 @@ function validate() {
   return null;
 }
 
+// 저장 버튼은 항상 표시한다. 직접 저장이 가능하면 폴더에 쓰고,
+// 불가능한 환경(미지원 브라우저·미리보기 등)에서는 .md 다운로드로 대체한다.
 if (directSaveBtn) {
-  if (!isSupported) {
-    // 미지원 브라우저: 버튼 숨기고 안내
-    directSaveBtn.style.display = 'none';
-    setStatus('이 브라우저는 직접 저장을 지원하지 않습니다. 아래 다운로드를 사용하세요.');
-  } else {
-    directSaveBtn.addEventListener('click', async () => {
-      const err = validate();
-      if (err) { setStatus(err, true); return; }
+  directSaveBtn.addEventListener('click', async () => {
+    const err = validate();
+    if (err) { setStatus(err, true); return; }
 
-      try {
-        directSaveBtn.disabled = true;
-        setStatus('저장 중…');
+    // 폴백: 직접 저장 미지원 → 다운로드
+    if (!isSupported) {
+      downloadMd();
+      setStatus('이 브라우저는 폴더 직접 저장을 지원하지 않아 .md 파일로 다운로드했습니다. posts/ 폴더에 넣고 index.json에 항목을 추가하세요.');
+      return;
+    }
 
-        let root = await getSavedRoot();
-        if (!root) {
-          setStatus('블로그 루트 폴더(my-blog)를 선택하세요…');
-          root = await pickRoot();
-        }
+    try {
+      directSaveBtn.disabled = true;
+      setStatus('저장 중…');
 
-        const slug = slugEl.value.trim();
-        const entry = {
-          slug,
-          title: titleEl.value.trim(),
-          date: dateEl.value.trim(),
-          tags: parseTags(tagsEl.value),
-          excerpt: excerptEl.value.trim(),
-        };
-
-        const result = await savePost(root, { slug, markdown: bodyEl.value, entry });
-        const action = result.replaced ? '수정' : '저장';
-        setStatus(`✓ ${slug}.md ${action} 완료 · index.json 갱신됨 (총 ${result.total}개).`);
-      } catch (e) {
-        if (e.name === 'AbortError') {
-          setStatus('폴더 선택이 취소되었습니다.');
-        } else {
-          setStatus(`저장 실패: ${e.message}`, true);
-        }
-      } finally {
-        directSaveBtn.disabled = false;
+      let root = await getSavedRoot();
+      if (!root) {
+        setStatus('블로그 루트 폴더(my-blog)를 선택하세요…');
+        root = await pickRoot();
       }
-    });
-  }
+
+      const slug = slugEl.value.trim();
+      const entry = {
+        slug,
+        title: titleEl.value.trim(),
+        date: dateEl.value.trim(),
+        tags: parseTags(tagsEl.value),
+        excerpt: excerptEl.value.trim(),
+      };
+
+      const result = await savePost(root, { slug, markdown: bodyEl.value, entry });
+      const action = result.replaced ? '수정' : '저장';
+      setStatus(`✓ ${slug}.md ${action} 완료 · index.json 갱신됨 (총 ${result.total}개).`);
+    } catch (e) {
+      if (e.name === 'AbortError') {
+        setStatus('폴더 선택이 취소되었습니다.');
+      } else {
+        // 권한·보안 컨텍스트 문제 등 → 다운로드로 대체
+        downloadMd();
+        setStatus(`폴더 저장에 실패해 .md 파일로 다운로드했습니다. (${e.message})`, true);
+      }
+    } finally {
+      directSaveBtn.disabled = false;
+    }
+  });
 }
 
 // JSON 복사
