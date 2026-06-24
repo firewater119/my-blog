@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>테트리스 — My Blog</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/tetris.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">My Blog</a>
+      <div class="header-actions">
+        <a href="guestbook.html" class="header-link">방명록</a>
+        <a href="write.html" class="header-link">글쓰기</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-container" style="max-width: 760px;">
+
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        목록으로
+      </a>
+
+      <h1 style="font-size:1.75rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:var(--space-8);">테트리스</h1>
+
+      <div class="tetris-wrap">
+        <div class="tetris-board-area">
+          <canvas id="board"></canvas>
+          <div class="tetris-overlay" id="overlay">
+            <div class="tetris-overlay-text" id="overlay-text">테트리스</div>
+            <button class="tetris-btn" id="start-btn">시작</button>
+          </div>
+        </div>
+
+        <aside class="tetris-side">
+          <div>
+            <div class="tetris-panel-title">홀드</div>
+            <canvas id="hold" width="110" height="80"></canvas>
+          </div>
+          <div>
+            <div class="tetris-panel-title">넥스트</div>
+            <canvas id="next" width="110" height="320"></canvas>
+          </div>
+          <div class="tetris-stats">
+            <div class="tetris-stat">
+              <span class="tetris-stat-label">점수</span>
+              <span class="tetris-stat-value" id="score">0</span>
+            </div>
+            <div class="tetris-stat">
+              <span class="tetris-stat-label">레벨</span>
+              <span class="tetris-stat-value" id="level">1</span>
+            </div>
+            <div class="tetris-stat">
+              <span class="tetris-stat-label">줄</span>
+              <span class="tetris-stat-value" id="lines">0</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="tetris-controls">
+        <h2>조작법</h2>
+        <dl>
+          <dt>← →</dt><dd>좌우 이동</dd>
+          <dt>↓</dt><dd>소프트 드롭</dd>
+          <dt>Space</dt><dd>하드 드롭</dd>
+          <dt>↑ / X</dt><dd>시계 방향 회전</dd>
+          <dt>Z / Ctrl</dt><dd>반시계 방향 회전</dd>
+          <dt>Shift / C</dt><dd>홀드</dd>
+          <dt>P</dt><dd>일시정지</dd>
+          <dt>Enter</dt><dd>시작 / 다시 시작</dd>
+        </dl>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 My Blog
+  </footer>
+
+  <script type="module" src="js/tetris.js"></script>
+</body>
+</html>
