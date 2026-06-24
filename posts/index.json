@@ -1,5 +1,12 @@
 [
   {
+    "slug": "today-i-learned",
+    "title": "오늘 배운 것",
+    "date": "2026-06-24",
+    "tags": ["회고", "웹개발", "기초"],
+    "excerpt": "클로드 코드로 블로그를 만들며 배운 HTML, CSS, JavaScript의 역할을 정리했다. HTML은 뼈대, CSS는 옷, JavaScript는 움직임 — 세 가지가 맞물려 하나의 웹사이트가 된다."
+  },
+  {
     "slug": "feature-test",
     "title": "마크다운 기능 테스트",
     "date": "2026-06-24",
