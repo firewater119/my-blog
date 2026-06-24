@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">My Blog</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환"></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-container">
+
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        목록으로
+      </a>
+
+      <article>
+        <header class="post-header">
+          <h1 id="post-title"> </h1>
+          <div class="post-header-meta" id="post-meta"></div>
+        </header>
+
+        <div id="toc-wrap"></div>
+
+        <div class="post-body" id="post-body">
+          <div class="state-loading">
+            <div class="spinner"></div>
+            불러오는 중…
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 My Blog
+  </footer>
+
+  <script type="module" src="js/post.js"></script>
+</body>
+</html>

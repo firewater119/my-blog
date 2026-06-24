@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글쓰기 — My Blog</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/write.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">My Blog</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환"></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-container" style="max-width: 1000px;">
+
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        목록으로
+      </a>
+
+      <div class="write-layout">
+
+        <form class="write-form" id="write-form" onsubmit="return false">
+          <div class="field">
+            <label for="f-title">제목</label>
+            <input id="f-title" type="text" placeholder="포스트 제목">
+          </div>
+
+          <div class="field">
+            <label for="f-slug">Slug (파일명)</label>
+            <input id="f-slug" type="text" placeholder="my-post">
+            <span class="field-hint">파일은 posts/&lt;slug&gt;.md 로 저장됩니다.</span>
+          </div>
+
+          <div class="field">
+            <label for="f-date">날짜</label>
+            <input id="f-date" type="text" placeholder="YYYY-MM-DD">
+          </div>
+
+          <div class="field">
+            <label for="f-tags">태그</label>
+            <input id="f-tags" type="text" placeholder="쉼표로 구분 (예: 개발, 일상)">
+          </div>
+
+          <div class="field">
+            <label for="f-excerpt">발췌문</label>
+            <textarea id="f-excerpt" rows="2" placeholder="목록에 표시될 짧은 요약"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="f-body">본문 (마크다운)</label>
+            <textarea id="f-body" placeholder="# 제목&#10;&#10;여기에 마크다운으로 작성하세요."></textarea>
+          </div>
+        </form>
+
+        <div class="write-preview">
+          <div class="panel-title">미리보기</div>
+          <div class="preview-box post-body" id="preview"></div>
+        </div>
+
+      </div>
+
+      <section class="export-section">
+        <div class="panel-title">발행</div>
+        <div class="export-actions">
+          <button class="btn" id="btn-save-direct">폴더에 직접 저장</button>
+          <button class="btn secondary" id="btn-download">.md 다운로드</button>
+          <button class="btn secondary" id="btn-copy">index.json 항목 복사</button>
+        </div>
+        <p class="save-status" id="save-status"></p>
+
+        <details class="export-details">
+          <summary>수동 적용 방법 / 생성될 JSON 항목</summary>
+          <pre class="json-out" id="json-out"></pre>
+          <div class="export-help">
+            <p><strong>직접 저장</strong>(권장, Chrome·Edge): 처음 한 번 블로그 루트 폴더(<code>my-blog</code>)를 선택하면 이후 버튼 한 번으로 <code>posts/&lt;slug&gt;.md</code> 작성과 <code>posts/index.json</code> 갱신이 자동 처리됩니다.</p>
+            <p><strong>수동</strong>: <code>.md 다운로드</code>한 파일을 <code>posts/</code>에 넣고, 위 JSON을 <code>posts/index.json</code> 배열 맨 앞에 추가합니다.</p>
+          </div>
+        </details>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 My Blog
+  </footer>
+
+  <script type="module" src="js/write.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">My Blog</a>
+      <div class="header-actions">
+        <a href="write.html" class="header-link">글쓰기</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-container">
+
+      <div class="search-box">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="검색…"
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <div id="tag-filter" class="tag-filter"></div>
+
+      <div id="post-list">
+        <div class="state-loading">
+          <div class="spinner"></div>
+          불러오는 중…
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 My Blog
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
