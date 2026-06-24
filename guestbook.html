@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방명록 — My Blog</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/guestbook.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">My Blog</a>
+      <div class="header-actions">
+        <a href="guestbook.html" class="header-link">방명록</a>
+        <a href="write.html" class="header-link">글쓰기</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환"></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-container">
+
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        목록으로
+      </a>
+
+      <h1 style="font-size:1.75rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:var(--space-2);">방명록</h1>
+      <p style="color:var(--color-text-muted); font-family:var(--font-sans); font-size:var(--font-size-sm); margin-bottom:var(--space-8);">
+        자유롭게 한 마디 남겨주세요.
+      </p>
+
+      <form class="gb-form" id="gb-form">
+        <div class="gb-name-field">
+          <input id="gb-name" type="text" placeholder="이름" maxlength="40" autocomplete="off">
+        </div>
+        <textarea id="gb-message" placeholder="내용을 입력하세요 (최대 500자)" maxlength="500"></textarea>
+        <div class="gb-form-row">
+          <span class="gb-status" id="gb-status"></span>
+          <button type="submit" class="gb-submit" id="gb-submit">남기기</button>
+        </div>
+      </form>
+
+      <div id="gb-list">
+        <div class="state-loading">
+          <div class="spinner"></div>
+          불러오는 중…
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 My Blog
+  </footer>
+
+  <script type="module" src="js/guestbook.js"></script>
+</body>
+</html>
