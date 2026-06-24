@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/announcements.css">
 </head>
 <body>
 
@@ -44,6 +45,17 @@
         </div>
       </div>
 
+      <section class="announcements" id="announcements">
+        <h2 class="announcements-title">공지사항</h2>
+        <div id="ann-list">
+          <div class="state-loading">
+            <div class="spinner"></div>
+            불러오는 중…
+          </div>
+        </div>
+        <nav class="ann-pager" id="ann-pager" aria-label="공지사항 페이지"></nav>
+      </section>
+
     </div>
   </main>
 
@@ -52,5 +64,6 @@
   </footer>
 
   <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/announcements.js"></script>
 </body>
 </html>
